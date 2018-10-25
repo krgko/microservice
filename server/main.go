@@ -3,9 +3,14 @@ package main
 import (
 	"fmt"
 	"net/http"
+	. "server/config"
+	. "server/dao" // . "./models"
 
-	. "./config"
-	. "./dao" // . "./models"
+<<<<<<< HEAD
+=======
+	. "server/config"
+	. "server/dao" // . "./models"
+>>>>>>> 6a45ba03b3b72a1fc3f42769c1b3c8dfaf39a4f4
 	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
 )
