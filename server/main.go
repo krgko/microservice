@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	"net/http"
+	. "server/config"
+	. "server/dao" // . "./models"
 
-	. "./config"
-	. "./dao" // . "./models"
 	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
 )
