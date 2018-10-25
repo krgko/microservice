@@ -2,12 +2,12 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 
 	. "./config"
 	. "./dao" // . "./models"
-	"github.com/gorilla/mux"
+	"github.com/gin-gonic/contrib/static"
+	"github.com/gin-gonic/gin"
 )
 
 var config = Config{}
@@ -31,10 +31,17 @@ func init() {
 }
 
 func main() {
-	r := mux.NewRouter()
-	r.HandleFunc("/", SearchProduct).Methods("GET")
+	router := gin.Default()
 
-	if err := http.ListenAndServe(":3000", r); err != nil {
-		log.Fatal(err)
+	router.Use(static.Serve("/", static.LocalFile("./public", true)))
+	api := router.Group("/api")
+	{
+		api.GET("/", func(c *gin.Context) {
+			c.JSON(http.StatusOK, gin.H{
+				"message": "pong",
+			})
+		})
 	}
+
+	router.Run(":3000")
 }
