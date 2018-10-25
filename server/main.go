@@ -6,8 +6,7 @@ import (
 	"net/http"
 
 	. "./config"
-	. "./dao"
-	. "./models"
+	. "./dao" // . "./models"
 	"github.com/gorilla/mux"
 )
 
