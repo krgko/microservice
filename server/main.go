@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
-	. "./config"
-	. "./dao" // . "./models"
+	. "server/config"
+	. "server/dao" // . "./models"
 	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
 )
