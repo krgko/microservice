@@ -14,7 +14,12 @@ var config = Config{}
 var dao = ProductsDAO{}
 
 func SearchProduct(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Hello World")
+	products, err := dao.FindAll()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Fprintln(w, products)
 }
 
 func init() {
