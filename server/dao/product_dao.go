@@ -4,6 +4,7 @@ import (
 	"log"
 
 	mgo "gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
 )
 
 type ProductsDAO struct {
@@ -11,10 +12,14 @@ type ProductsDAO struct {
 	Database string
 }
 
+type Product struct {
+	message string
+}
+
 var db *mgo.Database
 
 const (
-	COLLECTION = "products"
+	COLLECTION = "sample"
 )
 
 func (m *ProductsDAO) Connect() {
@@ -23,4 +28,10 @@ func (m *ProductsDAO) Connect() {
 		log.Fatal(err)
 	}
 	db = session.DB(m.Database)
+}
+
+func (m *ProductsDAO) FindAll() ([]Product, error) {
+	var products []Product
+	err := db.C(COLLECTION).Find(bson.M{}).All(&products)
+	return products, err
 }
