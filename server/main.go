@@ -13,15 +13,6 @@ import (
 var config = Config{}
 var dao = ProductsDAO{}
 
-func SearchProduct(w http.ResponseWriter, r *http.Request) {
-	products, err := dao.FindAll()
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	fmt.Fprintln(w, products)
-}
-
 func init() {
 	config.Read()
 
@@ -36,9 +27,14 @@ func main() {
 	router.Use(static.Serve("/", static.LocalFile("./public", true)))
 	api := router.Group("/api")
 	{
-		api.GET("/", func(c *gin.Context) {
+		api.GET("/product/search", func(c *gin.Context) {
+			products, err := dao.FindAll()
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
 			c.JSON(http.StatusOK, gin.H{
-				"message": "pong",
+				"message": products,
 			})
 		})
 	}
